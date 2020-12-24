@@ -6,10 +6,9 @@
 #include "structs.hpp" 
 #include "functions.hpp"
 
-std::list<Predmet> predmeti;
+std::list<Predmet> sviPredmeti;
 
-int main() {
-
+int mainProgram() {
 
   mainMenu();
   unsigned short x = 100; //inicijaliziran sa 100 kako bih  na pocetku programa program ispisao "Izaberi opciju: "
@@ -30,7 +29,13 @@ int main() {
   } else
     
   if (x == 2) {
-   predmetUnos();
+    try {
+      predmetUnos(sviPredmeti);
+    } catch(std::string e) { // Pitanje: zasto catch ovdje ne hvata ako postoji implicitna konverzija iz onog sto je baceno sa throw i ovog u catch() tipa kad je bacen niz karaktera a catch hvata stringove?
+      std::cout << e << std::endl;
+    } catch(...) { //ovaj catch hvata sve druge errore koji eksplicitno  nisu uhvaceni catch-evima iznad
+      std::cout << "NEPOZNAT ERROR!" << std::endl;
+    }
   } else
 
   if (x == 3) {
@@ -39,8 +44,17 @@ int main() {
     
   if (x == 4) {
     ispisAll();
-  } else std::cout << "\nKraj programa.";
+  } else return 0;
 
+  return 1;
+};
+
+int main() {
+
+  int toLoop;
+  do {
+    toLoop = mainProgram();
+  } while (toLoop);
 
 return 0;
 }
