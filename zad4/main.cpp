@@ -26,19 +26,19 @@ int main() {
   } while(std::cin.fail() || (x != 1 && x != 2 && x != 3 && x !=4 && x != 5)); 
 
   if (x == 1) {
-    //studentUnos();
+    studentUnos();
   } else
     
   if (x == 2) {
-   //predmetUnos();
+   predmetUnos();
   } else
 
   if (x == 3) {
-    //studentUpdate(); 
+    studentUpdate(); 
   } else
     
   if (x == 4) {
-    //ispisAll();
+    ispisAll();
   } else std::cout << "\nKraj programa.";
 
 
