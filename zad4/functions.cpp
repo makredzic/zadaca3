@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <limits>
 #include "functions.hpp"
 
 void mainMenu() {
@@ -10,8 +11,32 @@ void mainMenu() {
 
 void studentUnos() {
 
-  std::cout << "\n --- Unosenje Studenta ---\n";
-  std::cout << "Unesite broj indeksa studenta: ";
+  std::string brIndex, ime, prezime, grad;
+
+  std::cout << "\n --- Unosenje Studenta ---\nIspod unesite sljedece podatke\n";
+
+//Unosenje indeksa
+  std::cout << "Broj indeksa: ";
+  std::cin >> brIndex;
+ //ovdje dodat provjeru da li student vec postoji 
+ 
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  //std::cin >> ce uzeti prvu rijec, ukoliko korisnik unese vise rijei, prvu rijec uzima a ostale ostaju u bufferu i odmah se kupe za ime i ostale cin-ove ispod,
+  //tako da u slucaju da neko unese vise od jedne rijeci (a zadatak trazi samo jednu rijec za indeks)
+  //program NECE uzeti te rijeci za ime, prezime i ostalo
+  //std::numeric_limits<std::streamsize>::max se koristi da cin.ignore izignorise sve rijeci, koliko god ih bilo ili do '\n' karaktera
+  
+  
+  std::cout << "Ime: ";
+  std::getline(std::cin, ime);
+
+  std::cout << "Prezime: ";
+  std::getline(std::cin, prezime);
+
+  std::cout << "Grad: ";
+  std::getline(std::cin, grad);
+
+  std::cout << std::endl << brIndex << " " << ime << " " << prezime << " " << grad << std::endl;
   
 };
 

@@ -31,7 +31,7 @@ int mainProgram() {
   if (x == 2) {
     try {
       predmetUnos(sviPredmeti);
-    } catch(std::string e) { // Pitanje: zasto catch ovdje ne hvata ako postoji implicitna konverzija iz onog sto je baceno sa throw i ovog u catch() tipa kad je bacen niz karaktera a catch hvata stringove?
+    } catch(std::string e) { 
       std::cout << e << std::endl;
     } catch(...) { //ovaj catch hvata sve druge errore koji eksplicitno  nisu uhvaceni catch-evima iznad
       std::cout << "NEPOZNAT ERROR!" << std::endl;
@@ -55,6 +55,6 @@ int main() {
   do {
     toLoop = mainProgram();
   } while (toLoop);
-
+  std::cout << "Shutting down.\n";
 return 0;
 }
