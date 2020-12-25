@@ -4,7 +4,7 @@
 #include "structs.hpp"
 
 void mainMenu();
-void studentUnos();
+void studentUnos(const std::list<Predmet> &);
 void predmetUnos(std::list<Predmet> &);
 void studentUpdate();
 void ispisAll();

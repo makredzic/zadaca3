@@ -2,6 +2,8 @@
 #include <string>
 #include <list>
 #include <limits>
+#include <algorithm>
+
 #include "functions.hpp"
 
 void mainMenu() {
@@ -9,9 +11,10 @@ void mainMenu() {
  std::cout << "1. Dodaj Studenta\n2. Dodaj Predmet\n3. Promijeni podatak Studenta\n4. Ispisi sve studente\n5. Zatvori program\n";
 };
 
-void studentUnos() {
+void studentUnos(const std::list<Predmet> &sviPredmeti) {
 
-  std::string brIndex, ime, prezime, grad;
+  std::string brIndex, ime, prezime, grad, predmet;
+  int ocjena;
 
   std::cout << "\n --- Unosenje Studenta ---\nIspod unesite sljedece podatke\n";
 
@@ -36,8 +39,32 @@ void studentUnos() {
   std::cout << "Grad: ";
   std::getline(std::cin, grad);
 
-  std::cout << std::endl << brIndex << " " << ime << " " << prezime << " " << grad << std::endl;
+  //zakomentarisano ispod jer je samo sluzilo za testiranje, da vidim jel uneseno sve kako treba
+  //std::cout << std::endl << brIndex << " " << ime << " " << prezime << " " << grad << std::endl;
   
+  std::cout << "Unos ocjena za studenta: " << brIndex << std::endl;
+  
+  std::cout << "Naziv predmeta: ";
+  std::getline(std::cin, predmet);
+
+  for (std::list<Predmet>::const_iterator it = sviPredmeti.cbegin(); it != sviPredmeti.end(); it++) {
+     if(it->naziv != predmet) throw std::string{"Error: Taj predmet ne postoji u bazi."};
+  }
+
+
+  bool loop;
+  do {
+    loop = false;
+    std::cout << "Ocjena: ";
+    std::cin >> ocjena;
+    if (ocjena < 5 || ocjena > 10) {
+      std::cout << "Ocjena moze biti samo broj izmedju 5-10.\n";
+      loop = true;
+    }
+  } while (loop);
+
+
+
 };
 
 void predmetUnos(std::list<Predmet> &sviPredmeti) {

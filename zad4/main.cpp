@@ -25,7 +25,13 @@ int mainProgram() {
   } while(std::cin.fail() || (x != 1 && x != 2 && x != 3 && x !=4 && x != 5)); 
 
   if (x == 1) {
-    studentUnos();
+    try {
+      studentUnos(sviPredmeti);
+    } catch (std::string e) {
+      std::cout << e << std::endl;
+    } catch (...) {
+      std::cout << "NEPOZNAT ERROR!" << std::endl;
+    }
   } else
     
   if (x == 2) {
