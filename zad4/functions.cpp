@@ -92,7 +92,7 @@ void studentUnos(const std::list<Predmet> &sviPredmeti, std::list<Student> &sviS
   }
 
   sviStudenti.push_back(Student{brIndex, ime, prezime, grad, sveOcjene}); 
-
+  std::cout << "Student je, zajedno sa svim svojim ocjenama, uspjesno pohranjen.\n";
 };
 
 void predmetUnos(std::list<Predmet> &sviPredmeti) {
@@ -120,6 +120,27 @@ void studentUpdate() {
   std::cout << "\nNe radi trenutno.\n"; 
 };
 
-void ispisAll() {
-  std::cout << "\nNe radi trenutno.\n"; 
+void ispisAll(const std::list<Predmet> &sviPredmeti, const std::list<Student> &sviStudenti) {
+
+  std::cout << " --- Ispis Svih Studenata ---\n\n";
+  std::string header{"Br Indeksa | Ime | Prezime | "}; //ovdje bi trebalo napravit da je duzina kolone ove svake | ime | prezime|, itd jednaka ili malo veca od imena studenta sa najvecim brojem karaktera kako bi sve lijepo ispod stalo ALI meni to mrsko trenutno
+
+  for (const auto &predmet : sviPredmeti) {
+    header += std::string{predmet.naziv + " | "};
+  }
+  header += "\n";
+
+  std::cout << header;
+
+  //nije ovo ispod gotovo uopste
+  std::string tabela;
+  for (const auto &student : sviStudenti) {
+    tabela += std::string{student.brojIndeksa + " | " + student.ime + " | " + student.prezime + " | "}; 
+    for (const auto &x : student.ocjene) {
+      tabela += std::string{std::to_string(x.ocjena)}; 
+    }
+  }
+
+  
+
 };

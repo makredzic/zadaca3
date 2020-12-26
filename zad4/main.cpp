@@ -50,7 +50,7 @@ int mainProgram() {
   } else
     
   if (x == 4) {
-    ispisAll();
+    ispisAll(sviPredmeti, sviStudenti);
   } else return 0;
 
   return 1;
