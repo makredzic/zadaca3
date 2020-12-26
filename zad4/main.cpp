@@ -7,6 +7,7 @@
 #include "functions.hpp"
 
 std::list<Predmet> sviPredmeti;
+std::list<Student> sviStudenti;
 
 int mainProgram() {
 
@@ -26,7 +27,7 @@ int mainProgram() {
 
   if (x == 1) {
     try {
-      studentUnos(sviPredmeti);
+      studentUnos(sviPredmeti, sviStudenti);
     } catch (std::string e) {
       std::cout << e << std::endl;
     } catch (...) {

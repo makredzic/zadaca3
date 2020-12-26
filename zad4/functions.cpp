@@ -11,7 +11,7 @@ void mainMenu() {
  std::cout << "1. Dodaj Studenta\n2. Dodaj Predmet\n3. Promijeni podatak Studenta\n4. Ispisi sve studente\n5. Zatvori program\n";
 };
 
-void studentUnos(const std::list<Predmet> &sviPredmeti) {
+void studentUnos(const std::list<Predmet> &sviPredmeti, std::list<Student> &sviStudenti) {
 
   std::string brIndex, ime, prezime, grad, predmet;
   int ocjena;
@@ -21,8 +21,13 @@ void studentUnos(const std::list<Predmet> &sviPredmeti) {
 //Unosenje indeksa
   std::cout << "Broj indeksa: ";
   std::cin >> brIndex;
- //ovdje dodat provjeru da li student vec postoji 
  
+  bool found = false;
+  for (std::list<Student>::iterator it = sviStudenti.begin(); it != sviStudenti.end(); it++) {
+    if (it->brojIndeksa == brIndex) found = true;
+  }
+  if (found) throw std::string{"Student sa tim brojem indeksa vec postoji."};
+
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   //std::cin >> ce uzeti prvu rijec, ukoliko korisnik unese vise rijei, prvu rijec uzima a ostale ostaju u bufferu i odmah se kupe za ime i ostale cin-ove ispod,
   //tako da u slucaju da neko unese vise od jedne rijeci (a zadatak trazi samo jednu rijec za indeks)
@@ -38,32 +43,48 @@ void studentUnos(const std::list<Predmet> &sviPredmeti) {
 
   std::cout << "Grad: ";
   std::getline(std::cin, grad);
-
-  //zakomentarisano ispod jer je samo sluzilo za testiranje, da vidim jel uneseno sve kako treba
-  //std::cout << std::endl << brIndex << " " << ime << " " << prezime << " " << grad << std::endl;
-  
+ 
   std::cout << "Unos ocjena za studenta: " << brIndex << std::endl;
   
-  std::cout << "Naziv predmeta: ";
-  std::getline(std::cin, predmet);
+  //Ispod je loop koji ce unosit predmet i ocjenu za datog studenta onoliko koliko postoji predmeta u bazi
+  int i = 0;
+  std::vector<OcjenaIzPredmeta> sveOcjene;
+  while(i < sviPredmeti.size()) {
 
-  for (std::list<Predmet>::const_iterator it = sviPredmeti.cbegin(); it != sviPredmeti.end(); it++) {
-     if(it->naziv != predmet) throw std::string{"Error: Taj predmet ne postoji u bazi."};
+    std::cout << "Naziv predmeta: ";
+    std::getline(std::cin, predmet);
+
+
+  //Provjera postojanja predmeta
+    std::list<Predmet>::const_iterator predmetIt = sviPredmeti.cbegin();
+    bool found = false;
+
+    for (std::list<Predmet>::const_iterator it = sviPredmeti.cbegin(); it != sviPredmeti.end(); it++) {
+      if(it->naziv == predmet) {
+        predmetIt = it;
+        found = true;
+      }
+    }
+    if (!found) throw std::string{"Predmet ne postoji u bazi podataka."}; 
+
+
+    bool loop;
+    do {
+      loop = false;
+      std::cout << "Ocjena: ";
+      std::cin >> ocjena;
+      if (ocjena < 5 || ocjena > 10) {
+        std::cout << "Ocjena moze biti samo broj izmedju 5-10.\n";
+        loop = true;
+      }
+    } while (loop);
+
+
+    sveOcjene.push_back(OcjenaIzPredmeta{ocjena, predmetIt});
+    i++;
   }
 
-
-  bool loop;
-  do {
-    loop = false;
-    std::cout << "Ocjena: ";
-    std::cin >> ocjena;
-    if (ocjena < 5 || ocjena > 10) {
-      std::cout << "Ocjena moze biti samo broj izmedju 5-10.\n";
-      loop = true;
-    }
-  } while (loop);
-
-
+  sviStudenti.push_back(Student{brIndex, ime, prezime, grad, sveOcjene}); 
 
 };
 
