@@ -52,6 +52,7 @@ void studentUnos(const std::list<Predmet> &sviPredmeti, std::list<Student> &sviS
   while(i < sviPredmeti.size()) {
     if(i != 0) std::cout <<"Unesite sljedecu ocjenu.\n"; //jedina svrha ove linije je da ispise ovo svaki put OSIM za prvu ocjenu, znaci ova linija je bukv beskorisna isto ko ovaj komentar sto sad citas
     std::cout << "Naziv predmeta: ";
+    std::cin.ignore();
     std::getline(std::cin, predmet);
 
   //Provjera postojanja predmeta
@@ -64,7 +65,7 @@ void studentUnos(const std::list<Predmet> &sviPredmeti, std::list<Student> &sviS
         found = true;
       }
     }
-    if (!found) throw std::string{"Predmet ne postoji u bazi podataka."}; 
+    if (!found) throw std::string{"Error: Predmet ne postoji u bazi podataka.\n"}; 
 
 
     bool loop;
@@ -105,7 +106,7 @@ void predmetUnos(std::list<Predmet> &sviPredmeti) {
   }
 
   sviPredmeti.push_back(Predmet{ime, odsjek}); 
-  std::cout << "Ocjena uspjesno unesena.\n";
+  std::cout << "Predmet uspjesno unesen.\n";
 };
 
 void studentUpdate() {
