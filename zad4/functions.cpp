@@ -50,13 +50,12 @@ void studentUnos(const std::list<Predmet> &sviPredmeti, std::list<Student> &sviS
   int i = 0;
   std::vector<OcjenaIzPredmeta> sveOcjene;
   while(i < sviPredmeti.size()) {
-
+    if(i != 0) std::cout <<"Unesite sljedecu ocjenu.\n"; //jedina svrha ove linije je da ispise ovo svaki put OSIM za prvu ocjenu, znaci ova linija je bukv beskorisna isto ko ovaj komentar sto sad citas
     std::cout << "Naziv predmeta: ";
     std::getline(std::cin, predmet);
 
-
   //Provjera postojanja predmeta
-    std::list<Predmet>::const_iterator predmetIt = sviPredmeti.cbegin();
+    std::list<Predmet>::const_iterator predmetIt;
     bool found = false;
 
     for (std::list<Predmet>::const_iterator it = sviPredmeti.cbegin(); it != sviPredmeti.end(); it++) {
@@ -106,6 +105,7 @@ void predmetUnos(std::list<Predmet> &sviPredmeti) {
   }
 
   sviPredmeti.push_back(Predmet{ime, odsjek}); 
+  std::cout << "Ocjena uspjesno unesena.\n";
 };
 
 void studentUpdate() {
