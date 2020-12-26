@@ -51,8 +51,15 @@ void studentUnos(const std::list<Predmet> &sviPredmeti, std::list<Student> &sviS
   std::vector<OcjenaIzPredmeta> sveOcjene;
   while(i < sviPredmeti.size()) {
     if(i != 0) std::cout <<"Unesite sljedecu ocjenu.\n"; //jedina svrha ove linije je da ispise ovo svaki put OSIM za prvu ocjenu, znaci ova linija je bukv beskorisna isto ko ovaj komentar sto sad citas
+
     std::cout << "Naziv predmeta: ";
-    std::cin.ignore();
+
+    if (i!=0) std::cin.ignore(1000, '\n');
+    //Ako nema ovog ignore-a nikako, program uzme ime prvog predmeta i ocjenu i onda kad pokusa drugi, ispise da predmet ne postoji jer uzme valjda nesto sto je ostalo u bufferu i ne saceka input za drugi predmet
+    //Ako stavim cin.ignore onda na pocetku odmah moram dva puta unijet ime predmeta jer valja izignorise prvi unos?
+    //kad je i!=0 onda ce ono uradit ignore za svaki unos predmeta osim za prvi i onda program radi kako treba
+    //ZASTO I KAKO?!
+
     std::getline(std::cin, predmet);
 
   //Provjera postojanja predmeta
