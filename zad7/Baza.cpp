@@ -8,11 +8,13 @@ std::istream& BazaRadnika::ucitaj(std::istream& nekiUlaz) {
 };
 
 bool BazaRadnika::izbrisi_radnika(const std::string &ime) {
-  std::vector<Radnik>::iterator it = std::find(sviRadnici.begin(), sviRadnici.end(), ime);
-  if (it != sviRadnici.end()) {
-    sviRadnici.erase(it);
-    return true;
-  } else return false;
+  for (auto it = sviRadnici.begin(); it != sviRadnici.end(); it++) {
+    if (it->getIme() == ime) {
+      sviRadnici.erase(it);
+      return true;
+    }
+  }
+  return false;
 };
 
 double BazaRadnika::prosjek_plata() {
