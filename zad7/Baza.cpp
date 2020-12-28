@@ -33,8 +33,11 @@ double BazaRadnika::prosjek_godina() {
   return starost/i;
 };
 
-std::ostream& BazaRadnika::ispis(const std::ostream& izlaz) {
+void BazaRadnika::ispis(std::ostream& izlaz) {
   for (const auto& radnik : sviRadnici) {
-    izlaz << "Ime: " << radnik.getIme();
+    izlaz << "Ime: " << radnik.getIme() << std::endl;
+    izlaz << "Plata: " << radnik.getPlata() << std::endl;
+    izlaz << "Godine: " << radnik.getStarost() << std::endl;
+    izlaz << "- - - - - " << std::endl;
   }
 };
