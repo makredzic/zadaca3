@@ -22,14 +22,14 @@ Radnik::Radnik(std::istream& ulaz) {
   ulaz >> ime_ >> prezime_ >> starost_ >> plata_;
 };
 
-std::string Radnik::getIme() {
+std::string Radnik::getIme() const {
   return ime_;
 };
 
-int Radnik::getStarost() {
+int Radnik::getStarost() const {
   return starost_;
 };
 
-int Radnik::getPlata() {
+int Radnik::getPlata() const {
   return plata_;
 };

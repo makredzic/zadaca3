@@ -16,8 +16,25 @@ bool BazaRadnika::izbrisi_radnika(const std::string &ime) {
 };
 
 double BazaRadnika::prosjek_plata() {
-  double prosjek;
+  int plata = 0, i = 0;
   for (const auto& radnik : sviRadnici) {
-    //jos malo pa sace 
+    plata += radnik.getPlata(); 
+    i++;
+  }
+  return plata/i;
+};
+
+double BazaRadnika::prosjek_godina() {
+  int starost = 0, i = 0;
+  for (const auto& radnik : sviRadnici) {
+    starost += radnik.getStarost();
+    i++;
+  }
+  return starost/i;
+};
+
+std::ostream& BazaRadnika::ispis(const std::ostream& izlaz) {
+  for (const auto& radnik : sviRadnici) {
+    izlaz << "Ime: " << radnik.getIme();
   }
 };

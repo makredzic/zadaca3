@@ -9,9 +9,9 @@ class Radnik {
     int starost_;
     int plata_;
   public:
-    std::string getIme();
-    int getStarost();
-    int getPlata();
+    std::string getIme() const;
+    int getStarost() const;
+    int getPlata() const;
     void setPlata(const int&);
     Radnik();
     Radnik(const std::string&, const std::string&, const int&, const int&);
